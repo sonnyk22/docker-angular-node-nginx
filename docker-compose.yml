@@ -1,0 +1,49 @@
+# Commands:
+#   docker-compose -f "docker-compose.yml" build
+#   docker-compose -f "docker-compose.yml" up -d
+
+version: '3.7'
+
+services:
+
+  nginx:
+    container_name: rp-nginx
+    image: rp-nginx
+    build: ./client
+    ports:
+      - "4200:80"
+    depends_on:
+      - node
+    # links:
+    #   - node      
+    networks:
+      - rp-network
+
+  node:
+    container_name: rp-node
+    image: rp-node
+    build: ./server
+    environment:
+      - NODE_ENV=production
+      # - HOST=127.0.0.1
+      # - PORT=3000
+    ports:
+      - "3000:3000"
+    networks:
+      - rp-network
+
+  # redis:
+  #   container_name: redis
+  #   image: geofrontend/redis
+  #   build: 
+  #     context: .
+  #     dockerfile: ../.docker/redis.development.dockerfile
+  #   ports:
+  #     - "6379"
+  #   networks:
+  #     - rp-network
+
+networks:
+  rp-network:
+    name: rp-network
+    driver: bridge
