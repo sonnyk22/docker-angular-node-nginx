@@ -7,8 +7,8 @@
     "lint": "lint /src"    
   },
   "dependencies": {
-    "body-parser": "1.19.0",
-    "express": "4.17.1",
+    "body-parser": "1.20.1",
+    "express": "4.18.2",
     "ip": "^1.1.5",
     "os": "^0.1.1",
     "url": "^0.11.0"
